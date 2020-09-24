@@ -1,10 +1,9 @@
 const { validationResult } = require("express-validator"),
-  config = require("config"),
   axios = require("axios"),
   ProfileModel = require("../models/Profile"),
   UserModel = require("../models/User"),
   PostModel = require("../models/Post");
-
+require("dotenv").config({ path: ".env" });
 const getCurrentProfile = async (req, res, next) => {
   console.log(
     "\nreq.user (get | routes/api/profile/me | profileController) ->",
@@ -320,8 +319,8 @@ const deleteEduFromProfile = async (req, res, next) => {
 
 const getUserGithubRepos = async (req, res, next) => {
   const username = req.params.username,
-    githubClientId = config.get("githubClientId"),
-    githubSecret = config.get("githubSecret");
+    githubClientId = process.env.githubClientId,
+    githubSecret = process.env.githubSecret;
 
   try {
     const uri = encodeURI(

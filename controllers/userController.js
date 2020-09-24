@@ -2,9 +2,8 @@ const { validationResult } = require("express-validator"),
   gravatar = require("gravatar"),
   bcrypt = require("bcryptjs"),
   jwt = require("jsonwebtoken"),
-  config = require("config"),
   UserModel = require("../models/User");
-
+require("dotenv").config({ path: ".env" });
 const registerUser = async (req, res, next) => {
   console.log(
     "\nreq.body (post | routes/api/users | userController) ->",
@@ -57,7 +56,7 @@ const registerUser = async (req, res, next) => {
 
     jwt.sign(
       payload,
-      config.get("jwtSecret"),
+      process.env.jwtSecret,
       { expiresIn: 360000 },
       (error, token) => {
         if (error) throw error;

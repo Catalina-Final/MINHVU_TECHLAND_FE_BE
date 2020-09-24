@@ -1,6 +1,5 @@
-const jwt = require("jsonwebtoken"),
-  config = require("config");
-
+const jwt = require("jsonwebtoken");
+require("dotenv").config({ path: ".env" });
 const authMiddleware = (req, res, next) => {
   // when a req is sent to a protected route, the token needs to be included within the req header
   const token = req.header("x-auth-token");
@@ -14,7 +13,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     // verify the token if there's one
-    const verifiedToken = jwt.verify(token, config.get("jwtSecret"));
+    const verifiedToken = jwt.verify(token, process.env.jwtSecret);
 
     console.log("\nverified token (authMiddleware) ->", verifiedToken);
 

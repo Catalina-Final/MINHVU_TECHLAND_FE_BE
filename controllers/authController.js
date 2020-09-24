@@ -1,7 +1,8 @@
+require("dotenv").config({ path: ".env" });
+
 const { validationResult } = require("express-validator"),
   jwt = require("jsonwebtoken"),
   bcrypt = require("bcryptjs"),
-  config = require("config"),
   UserModel = require("../models/User");
 
 const getUserByToken = async (req, res, next) => {
@@ -56,7 +57,7 @@ const authenticateUser = async (req, res, next) => {
 
     jwt.sign(
       payload,
-      config.get("jwtSecret"),
+      process.env.jwtSecret,
       { expiresIn: 360000 },
       (error, token) => {
         if (error) throw error;

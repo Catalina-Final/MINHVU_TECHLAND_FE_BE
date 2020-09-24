@@ -1,3 +1,4 @@
+require("dotenv").config();
 const path = require("path"),
   express = require("express"),
   app = express(),
@@ -7,7 +8,6 @@ const path = require("path"),
   authRoutes = require("./routes/api/auth"),
   postsRoutes = require("./routes/api/posts"),
   profileRoutes = require("./routes/api/profile");
-
 // connect to the db
 connectDB();
 

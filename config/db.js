@@ -1,7 +1,7 @@
+require("dotenv").config({ path: ".env" });
 const mongoose = require("mongoose"),
-  config = require("config"),
-  db = config.get("mongoURI");
-
+  db = process.env.mongoURI;
+console.log(db);
 const connectDB = async () => {
   try {
     await mongoose.connect(db, {
@@ -13,7 +13,7 @@ const connectDB = async () => {
 
     console.log("mongodb connected");
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
 
     // in case of error, exit process with failure
     process.exit(1);
